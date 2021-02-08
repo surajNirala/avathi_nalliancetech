@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JwtAuthController;
+use App\Http\Controllers\MarketplaceInventoryController;
 use App\Http\Controllers\PostController;
 
 /*
@@ -27,9 +28,8 @@ Route::group([
     Route::post('/signout', [JwtAuthController::class, 'signout']);
 });
 
-Route::group(['middleware' => 'api','prefix' => 'post'], function () {
-    Route::post('create',[PostController::class, 'create']);
-    Route::post('postlist',[PostController::class, 'postlist']);
-    Route::post('postdetails',[PostController::class, 'postdetails']);
-
+Route::group(['middleware' => 'api','prefix' => 'inventory'], function () {
+   Route::get('list', [MarketplaceInventoryController::class, 'index']);
+   Route::post('store', [MarketplaceInventoryController::class, 'store']);
+   Route::post('search', [MarketplaceInventoryController::class, 'search']);
 });
